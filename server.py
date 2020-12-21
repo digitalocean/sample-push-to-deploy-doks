@@ -8,7 +8,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         self.send_response(HTTPStatus.OK)
         self.end_headers()
-        msg = 'Hello there!! You requested %s' % (self.path)
+        msg = 'Hello there! You requested %s' % (self.path)
         self.wfile.write(msg.encode())
 
 port = int(os.getenv('PORT', 80))
