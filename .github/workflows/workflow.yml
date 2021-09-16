@@ -38,17 +38,17 @@ jobs:
     
     # Build a Docker image of your application in your registry and tag the image with the $GITHUB_SHA.
     - name: Build container image
-      run: docker build -t registry.digitalocean.com/sdas/python-example:$(echo $GITHUB_SHA | head -c7) .
+      run: docker build -t registry.digitalocean.com/${{ secrets.REPO_NAME }}/python-example:$(echo $GITHUB_SHA | head -c7) .
 
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       run: doctl registry login --expiry-seconds 1200
 
     - name: Push image to DigitalOcean Container Registry
-      run: docker push registry.digitalocean.com/sdas/python-example:$(echo $GITHUB_SHA | head -c7)
+      run: docker push registry.digitalocean.com/${{ secrets.REPO_NAME }}/python-example:$(echo $GITHUB_SHA | head -c7)
 
     # Deploy to DigitalOCcean Kubernetes.
     - name: Update deployment file
-      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|registry.digitalocean.com/sdas/python-example:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yml
+      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|registry.digitalocean.com/${{ secrets.REPO_NAME }}/python-example:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yml
 
     - name: Save DigitalOcean kubeconfig with short-lived credentials
       run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 mycluster
@@ -59,7 +59,7 @@ jobs:
     #  run: doctl registry kubernetes-manifest | kubectl apply -f -
       
     #- name: Reference the secret you just uploaded as an imagePullSecrets
-    #  run: "kubectl patch serviceaccount default -p '{\"imagePullSecrets\": [{\"name\": \"registry-sdas\"}]}'"
+    #  run: "kubectl patch serviceaccount default -p '{\"imagePullSecrets\": [{\"name\": \"registry\"}]}'"
 
     - name: Deploy to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/config/deployment.yml
