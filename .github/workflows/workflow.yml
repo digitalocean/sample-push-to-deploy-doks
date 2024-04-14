@@ -41,8 +41,7 @@ jobs:
       run: docker build -t ${{ secrets.REGISTRY_NAME }}/python-example:$(echo $GITHUB_SHA | head -c7) .
 
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
-      run: docker login -u nojfree@gmail.com -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
-      #doctl registry login --expiry-seconds 1200
+      run: doctl registry login --expiry-seconds 1200
 
     - name: Push image to DigitalOcean Container Registry
       run: docker push ${{ secrets.REGISTRY_NAME }}/python-example:$(echo $GITHUB_SHA | head -c7)
