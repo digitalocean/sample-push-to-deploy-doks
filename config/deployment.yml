@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: python
-        image: python:latest
+        image: registry.digitalocean.com/cr1nyc3/python-example:93d39d3
         ports:
         - containerPort: 80
         resources:
