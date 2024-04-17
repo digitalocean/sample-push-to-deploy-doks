@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: python
-        image: <IMAGE>
+        image: python:latest
         ports:
         - containerPort: 80
         resources:
