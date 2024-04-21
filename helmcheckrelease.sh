@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # Webhook URL for Microsoft Teams
-webhook_url="https://outlook.office.com/webhook/your-webhook-url"
-
+webhook_url = https://discord.com/api/webhooks/1231502169304334346/nRn6IKAB7xnxPWMsjhe3if9f_l5tfMZLgNyMXcasADh8Y-bxFok5vRnqbIDze7GbcpsK
 # Function to send message to Microsoft Teams
-send_teams_notification() {
+send_discord_webhook() {
     local chart=$1
     local current_version=$2
     local latest_version=$3
@@ -55,7 +54,7 @@ echo "$releases" | jq -r '.[] | "\(.namespace) \(.name) \(.chart) \(.app_version
     # Compare the current version with the latest version
     if [ "$version" != "$latest_version" ]; then
         echo "New version available for $chart_name: $latest_version (current version: $version)"
-        send_teams_notification "$chart_name" "$version" "$latest_version"
+        send_discord_webhook "$chart_name" "$version" "$latest_version"
     else
         echo "No update available for $chart_name (current version: $version)"
     fi
