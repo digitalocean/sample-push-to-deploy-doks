@@ -10,24 +10,13 @@ send_discord_webhook() {
 
     # Prepare the JSON payload
     json_payload=$(cat <<EOF
-{
-    "@type": "MessageCard",
-    "@context": "http://schema.org/extensions",
-    "themeColor": "0076D7",
-    "summary": "New Helm Chart Version Available",
-    "sections": [{
-        "activityTitle": "Update Available for Helm Chart",
-        "activitySubtitle": "A new version of $chart is available.",
-        "facts": [{
-            "name": "Current Version:",
-            "value": "$current_version"
-        }, {
-            "name": "Latest Version:",
-            "value": "$latest_version"
-        }],
-        "markdown": true
-    }]
+
+    {
+    "username": "Helm Update Bot",
+    "avatar_url": "https://your-avatar-image-url",
+    "content": "A new version of **$chart** is available. Current version: **$current_version**. Latest version: **$latest_version**."
 }
+
 EOF
     )
 
