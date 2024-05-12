@@ -40,5 +40,5 @@ jobs:
 
       - name: Run Helm Update Check Script
         run: |
-          chmod +x ./helmcheckrelease.sh
-          ./helmcheckrelease.sh
+          chmod +x ./helmcheckteams.sh
+          ./helmcheckteams.sh
