@@ -1,3 +1,6 @@
+> ⚠️ **This repository is archived and kept for reference purposes only.**  
+> It is no longer maintained and will not receive updates or support.
+
 ## Push-to-Deploy Example Using GitHub Actions for DigitalOcean
 This repository contains an example workflow using the [GitHub Action for DigitalOcean](https://github.com/digitalocean/action-doctl) to build, tag, push a container image to your DigiatlOcean container registry and deploy to a DigitalOcean Kubernetes cluster.
 
